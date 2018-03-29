@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+<script>
+function createXHR(){
+	var xhr = null;
+	try{xhr=new ActiveObject("microsoft.xmlhttp");}
+	catch(e){
+		try{xhr=new XMLHttpRequest();}
+		catch(e1){
+			alert("别搞了，浏览器太差");
+		}
+	}
+	return xhr;
+}
+function addTrade(){
+var request = createXHR();
+var trade = {
+ "sender": "d4ee26eee15148ee92c6cd394edd974e",
+ "recipient": "someone-other-address",
+ "amount": 5
+};
+var url = "http://localhost:8000/transactions/new/";
+request.open("POST", url, true);
+request.onreadystatechange = function(){
+	if(request.readyState==4){
+		if(request.status==200||request.status==201){
+			document.getElementById("result").innerHTML=request.responseText;
+		}
+	}
+};
+request.setRequestHeader("Content-Type", "application/json");
+request.send(JSON.stringify(trade));
+
+}
+</script>
+</head>
+<title>testchain</title>
+<h1>testing chain</h1>
+
+<!--<form method="post" action="transactions/new">-->
+<button onclick="addTrade()">new</button>
+<!--</form>-->
+<div id="result"></div>
+</body>
+</html>
