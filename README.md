@@ -5,4 +5,4 @@ requirement:django,qpython2
 
 Here are some pictures about the project running:
 
-![图片名称](图片地址)
+![图1](https://github.com/xiaomile/blockchain-qpython2/blob/master/picture/temp/Screenshot_2018-03-30-14-10-34-172_com.android.browser.png)
