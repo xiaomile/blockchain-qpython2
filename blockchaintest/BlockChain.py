@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 import hashlib
 from time import time
 from uuid import uuid4
@@ -51,8 +52,8 @@ class Blockchain(object):
 
         while current_index < len(chain):
             block = chain[current_index]
-            print(f'{last_block}')
-            print(f'{block}')
+            print(str(last_block))
+            print(str(block))
             print("\n-----------\n")
             # Check that the hash of the block is correct
             if block['previous_hash'] != self.hash(last_block):
@@ -82,7 +83,7 @@ class Blockchain(object):
 
         # Grab and verify the chains from all the nodes in our network
         for node in neighbours:
-            response = requests.get(f'http://{node}/chain')
+            response = requests.get('http://'+node+'/chain')
 
             if response.status_code == 200:
                 length = response.json()['length']
@@ -122,6 +123,6 @@ class Blockchain(object):
     @staticmethod
     def valid_proof(last_proof,proof):
         #验证hash
-        guess = f'{last_proof}{proof}'.encode()
+        guess = str(last_proof)+str(proof).encode()
         guess_hash = hashlib.sha256(guess).hexdigest()
         return guess_hash[:4] == '0000'

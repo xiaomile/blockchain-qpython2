@@ -43,7 +43,8 @@ def mine(request):
     return HttpResponse(json.dumps(response), content_type="application/json")
 
 def new_transactions(request):
-    #print(request.body)
+    #print(request)
+    #print('body'+str(request.body))
     
     values = json.loads(request.body)
     #values = str(values)
@@ -52,6 +53,6 @@ def new_transactions(request):
         return 'Missing values',400
 
     index = blockchain.new_transaction(values['sender'],values['recipient'],values['amount'])
-    response = {'message':f'Transactions will be added to Block {index}'}
+    response = {'message':'Transactions will be added to Block '+str(index)}
     return HttpResponse(json.dumps(response), content_type="application/json")
 
