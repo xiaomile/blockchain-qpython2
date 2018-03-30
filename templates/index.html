@@ -21,7 +21,7 @@ var trade = {
  "recipient": "someone-other-address",
  "amount": 5
 };
-var url = "http://localhost:8000/transactions/new/";
+var url = "/transactions/new/";
 request.open("POST", url, true);
 request.onreadystatechange = function(){
 	if(request.readyState==4){
@@ -34,13 +34,49 @@ request.setRequestHeader("Content-Type", "application/json");
 request.send(JSON.stringify(trade));
 
 }
+function getchain(){
+var request = createXHR();
+var trade = {};
+var url = "/chain/";
+request.open("POST", url, true);
+request.onreadystatechange = function(){
+	if(request.readyState==4){
+		if(request.status==200||request.status==201){
+			document.getElementById("result").innerHTML=request.responseText;
+		}
+	}
+};
+request.setRequestHeader("Content-Type", "application/json");
+request.send(JSON.stringify(trade));
+
+}
+
+function domine(){
+var request = createXHR();
+var trade = {};
+var url = "/mine/";
+request.open("POST", url, true);
+request.onreadystatechange = function(){
+	if(request.readyState==4){
+		if(request.status==200||request.status==201){
+			document.getElementById("result").innerHTML=request.responseText;
+		}
+	}
+};
+request.setRequestHeader("Content-Type", "application/json");
+request.send(JSON.stringify(trade));
+
+}
+
 </script>
 </head>
 <title>testchain</title>
 <h1>testing chain</h1>
 
 <!--<form method="post" action="transactions/new">-->
-<button onclick="addTrade()">new</button>
+<button onclick="addTrade()">创建新节点</button>
+<button onclick="getchain()">查看区块链</button>
+<button onclick="domine()">创建新区块</button>
 <!--</form>-->
 <div id="result"></div>
 </body>
